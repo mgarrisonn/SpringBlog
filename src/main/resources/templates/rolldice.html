@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice Game</title>
+</head>
+<body>
+<h1>Dice Game</h1>
+<form action="/roll-dice" method="post">
+    <label for="num">Choose a random number</label>
+    <br>
+    <input type="number" name="num" id="num" min="1" max="6">
+    <button>Submit your number</button>
+</form>
+
+<h3 th:if="${userGuess} == ${diceRoll}">Winner</h3>
+<h3 th:if="${userGuess} == ${diceRoll}">You chose: <span th:text="${userGuess}"></span></h3>
+<h3 th:if="${userGuess} == ${diceRoll}">The die rolled: <span th:text="${diceRoll}"></span></h3>
+
+<h3 th:if="${userGuess} != ${diceRoll}">Loser</h3>
+<h3 th:if="${userGuess} != ${diceRoll}">You chose: <span th:text="${userGuess}"></span></h3>
+<h3 th:if="${userGuess} != ${diceRoll}">The die rolled: <span th:text="${diceRoll}"></span></h3>
+
+
+</body>
+</html>
