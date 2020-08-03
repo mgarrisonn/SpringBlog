@@ -1,5 +1,6 @@
-package com.codeup.springblog;
+package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class PostController {
         myPost.add(new Post(4, "Title 4", "Text here"));
 
 //        return "Here are all the posts";
+        model.addAttribute("posts", myPost);
         return "posts/index";
     }
 
@@ -33,9 +35,9 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-//    @ResponseBody
+    @ResponseBody
     public String create() {
-//        return "Here is the form to create a post";
+        return "Here is the form to create a post";
     }
 
     @GetMapping("/post/create")
