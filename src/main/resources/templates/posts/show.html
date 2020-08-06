@@ -8,5 +8,9 @@
 <body>
     <h1 th:text="${title}"></h1>
     <p th:text="${body}"></p>
+    <a th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit Post</a>
+    <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
+        <button>Delete</button>
+    </form>
 </body>
 </html>
