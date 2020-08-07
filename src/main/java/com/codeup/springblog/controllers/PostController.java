@@ -47,13 +47,11 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String create() {
         return "posts/create";
     }
 
-    @GetMapping("/posts/create")
-    @ResponseBody
+    @PostMapping("/posts/create")
     public String insert(@RequestParam String title, @RequestParam String body) {
         User user = usersDao.getOne(1L);
         Post post = new Post(title, body, user);
