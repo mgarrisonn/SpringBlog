@@ -5,7 +5,6 @@ import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.GreetingSvc;
 import com.codeup.springblog.services.SillySvc;
-import javafx.geometry.Pos;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
