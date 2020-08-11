@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 @Controller
 public class ProfileController {
+
     @GetMapping("/profile/{username}")
     public String viewProfile(@PathVariable String username, Model model){
         model.addAttribute("user", username);
@@ -21,13 +22,15 @@ public class ProfileController {
     public String viewProfile(){
         return "profile";
     }
+
     @PostMapping("/profile")
     public String viewLoginInfo(@RequestParam(name = "username") String username, @RequestParam(name="password") String password, Model model){
         ArrayList<String> ads = new ArrayList<String>();
-        boolean isLoggedIn = true;
         ads.add("Ad 1");
         ads.add("Ad 2");
         ads.add("Ad 3");
+
+        boolean isLoggedIn = true;
 
         model.addAttribute("username", username);
         model.addAttribute("password", password);

@@ -2,6 +2,7 @@ package com.codeup.springblog.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -15,23 +16,35 @@ public class Post {
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String body;
+    private String post;
+
+    @OneToMany(mappedBy = "parentPost")
+    private List<Comment> comments;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "user_id")
     private User author;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "post_tag",
+            joinColumns = {@JoinColumn(name="post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
+    )
+    private List<Tag> tags;
 
     public Post(){}
 
-    public Post(long id, String title, String body){
+    public Post(long id, String title, String post){
         this.id = id;
         this.title = title;
-        this.body = body;
+        this.post = post;
     }
 
-    public Post(String title, String body, User author){
+    public Post(Long id, String title, String post, User author){
+        this.id = id;
         this.title = title;
-        this.body = body;
+        this.post = post;
         this.author = author;
     }
 
@@ -41,16 +54,16 @@ public class Post {
         return this.title;
     }
 
-    public String getBody(){
-        return this.body;
+    public String getPost(){
+        return this.post;
     }
 
     public void setTitle(String newTitle){
         this.title = newTitle;
     }
 
-    public void setBody(String newBody){
-        this.body = newBody;
+    public void setPost(String newPost){
+        this.post = newPost;
     }
 
     public long getId() {
@@ -67,5 +80,21 @@ public class Post {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
