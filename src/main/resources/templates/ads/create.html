@@ -7,16 +7,16 @@
 </head>
 <body>
 
-<!-- WITHOUT form model binding -->
-<!--<form action="/ads/create" method="post">-->
-<!--    Title:-->
-<!--    <input name="title" />-->
-<!--    <br />-->
-<!--    Description:-->
-<!--    <input name="description" />-->
-<!--    <br />-->
-<!--    <input type="submit" />-->
-<!--</form>-->
+ WITHOUT form model binding
+<form action="/ads/create" method="post">
+    Title:
+    <input name="title" />
+    <br />
+    Description:
+    <input name="description" />
+    <br />
+    <input type="submit" />
+</form>
 
 <form action="/ads/create" method="post" th:object="${ad}">
     <div class="form-group">

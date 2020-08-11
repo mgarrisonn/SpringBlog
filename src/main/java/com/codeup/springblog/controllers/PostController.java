@@ -7,6 +7,7 @@ import com.codeup.springblog.repositories.CommentRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -101,13 +102,14 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@RequestParam(name = "createTitle") String createTitle,
-                             @RequestParam(name = "createBody") String createBody){
-        User user = usersDao.getOne(1L);
-        Post post = new Post();
+    public String createPost(@ModelAttribute Post post){
+//        User user = usersDao.getOne(1L);
+//        Post post = new Post();
+//        post.setAuthor(user);
+//        post.setTitle(createTitle);
+//        post.setPost(createBody);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setAuthor(user);
-        post.setTitle(createTitle);
-        post.setPost(createBody);
         postsDao.save(post);
         return "redirect:/posts";
     }
@@ -129,4 +131,18 @@ public class PostController {
         return "redirect:/posts/" + id;
     }
 
+
+
+//    @GetMapping("users/register")
+//    public String showRegisterForm(Model model){
+//        model.addAttribute("user", new User());
+//
+//        return "register";
+//    }
+//
+//    @PostMapping("users/register")
+//    public String createUser(@ModelAttribute User user){
+//        usersDao.save(user);
+//        return "redirect:/posts";
+//    }
 }
