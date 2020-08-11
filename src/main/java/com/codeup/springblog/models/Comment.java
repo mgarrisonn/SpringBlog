@@ -14,9 +14,9 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "ad_id")
+    @JoinColumn(name = "post_id")
     @JsonBackReference
-    private Ad parentAd;
+    private Post parentPost;
 
     public Comment(){}
 
@@ -36,11 +36,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Ad getParentAd() {
-        return parentAd;
+    public Post getParentPost() {
+        return parentPost;
     }
 
-    public void setParentAd(Ad parentAd) {
-        this.parentAd = parentAd;
+    public void setParentPost(Post parentPost) {
+        this.parentPost = parentPost;
     }
 }

@@ -23,7 +23,7 @@ public class SillySvc {
 
         int total = 0;
         for(Post post : posts){
-            total += post.getBody().length();
+            total += post.getPost().length();
         }
 
         for(User user : users){

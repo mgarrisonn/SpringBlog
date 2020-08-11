@@ -1,48 +1,46 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Comment;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
+import com.codeup.springblog.repositories.CommentRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
 
     private final PostRepository postsDao;
     private final UserRepository usersDao;
+    private final CommentRepository commentDao;
+//    private final EmailService emailService;
 
-    public PostController(PostRepository postsDao, UserRepository usersDao){
+    public PostController(PostRepository postsDao, UserRepository usersDao, CommentRepository commentDao){
         this.postsDao = postsDao;
         this.usersDao = usersDao;
+        this.commentDao = commentDao;
     }
 
     @GetMapping("/posts")
-//    @ResponseBody
     public String index(Model model) {
-//        ArrayList<Post> myPost = new ArrayList<>();
-//        myPost.add(new Post(2, "Title 2", "Text here"));
-//        myPost.add(new Post(3, "Title 3", "Text here"));
-//        myPost.add(new Post(4, "Title 4", "Text here"));
-
-//        return "Here are all the posts";
-        model.addAttribute("posts", postsDao.findAll());
+        List<Post> myPost = postsDao.findAll();
+        model.addAttribute("posts", myPost);
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-//    @ResponseBody
-    public String show(@PathVariable long id, Model model) {
+    public String show(@PathVariable(value = "id") long id, Model model) {
         Post pulledPost = postsDao.getOne(id);
+        List<Comment> getComments = postsDao.getOne(id).getComments();
+        model.addAttribute("comments", getComments);
         model.addAttribute("post", pulledPost);
-//        Post myPost = new Post(id, "Title", "Hello world");
-//        return "Here is a post with the id: " + id;
-//        model.addAttribute("title", myPost.getTitle());
-//        model.addAttribute("body", myPost.getBody());
         return "posts/show";
     }
 
@@ -80,8 +78,18 @@ public class PostController {
 //        return "redirect:/posts/" + id;
 //    }
 
+    @PostMapping("/posts/show/{id}/comment")
+    public String getPost(@PathVariable(value = "id") long id, @RequestParam(name = "createComment") String createComment) {
+        Post post = postsDao.getOne(id);
+        Comment comment = new Comment();
+        comment.setContent(createComment);
+        comment.setParentPost(post);
+        commentDao.save(comment);
+        return "redirect:/posts/show/" + id;
+    }
+
     @PostMapping("/posts/{id}/delete")
-    public String deletePost(@PathVariable long id){
+    public String deletePost(@PathVariable(name = "delete") long id){
         postsDao.deleteById(id);
         return "redirect:/posts";
     }
@@ -93,9 +101,13 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post){
+    public String createPost(@RequestParam(name = "createTitle") String createTitle,
+                             @RequestParam(name = "createBody") String createBody){
         User user = usersDao.getOne(1L);
+        Post post = new Post();
         post.setAuthor(user);
+        post.setTitle(createTitle);
+        post.setPost(createBody);
         postsDao.save(post);
         return "redirect:/posts";
     }
@@ -107,11 +119,14 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String editPost(@PathVariable long id, Post post){
-        User user = usersDao.getOne(1L);
-        post.setAuthor(user);
+    public String editPost(@PathVariable long id,
+                            @RequestParam(name = "titleEdit")String titleUpdate,
+                           @RequestParam(name = "postEdit") String postUpdate){
+        Post post = postsDao.getOne(id);
+        post.setTitle(titleUpdate);
+        post.setPost(postUpdate);
         postsDao.save(post);
-        return "redirect:/posts";
+        return "redirect:/posts/" + id;
     }
 
 }
