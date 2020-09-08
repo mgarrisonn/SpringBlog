@@ -1,0 +1,168 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Test</title>-->
+
+
+<!--    &lt;!&ndash; This script tag includes the Filestack API into your HTML file &ndash;&gt;-->
+<!--    <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash; Button calls function 'pickMark()' onclick now &ndash;&gt;-->
+<!--<input type="BUTTON" value="Pick Watermark" id="pickWatermark" onclick="pickMark()">-->
+<!--<script>-->
+<!--    var client = filestack.init(FILESTACK_KEY);-->
+
+<!--    //The function pickMark()-->
+<!--    function pickMark() {-->
+<!--    }-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!--function geocode(search, token) {-->
+<!--var baseUrl = 'https://api.mapbox.com';-->
+<!--var endPoint = '/geocoding/v5/mapbox.places/';-->
+<!--return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)-->
+<!--.then(function(res) {-->
+<!--return res.json();-->
+<!--// to get all the data from the request, comment out the following three lines...-->
+<!--}).then(function(data) {-->
+<!--return data.features[0].center;-->
+<!--});-->
+<!--}-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Mapbox</title>-->
+
+<!--    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>-->
+<!--    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />-->
+
+<!--    <style>-->
+<!--        #map {-->
+<!--            width: 100%;-->
+<!--            height: 600px;-->
+<!--        }-->
+<!--    </style>-->
+
+<!--</head>-->
+<!--<body>-->
+
+
+<!--<div id='map'></div>-->
+
+<!--&lt;!&ndash;    avoid pushing work to github with api key &ndash;&gt;-->
+<!--&lt;!&ndash;    could be banned from using api if pushed up to github&ndash;&gt;-->
+<!--<script src="../keys.js"></script>-->
+<!--<script src="../javascript/map_geocode.js"></script>-->
+<!--<script>-->
+
+<!--    mapboxgl.accessToken = MAPBOX_KEY;-->
+
+<!--    var map = new mapboxgl.Map({-->
+<!--        container: 'map',-->
+<!--        style: 'mapbox://styles/mapbox/streets-v9',-->
+<!--        zoom: 10,-->
+<!--        center: [-98.4916, 29.4252],-->
+<!--        // center: {lng: -98.4916, lat: 29.4252}-->
+<!--    });-->
+
+<!--    // map.setZoom(10);-->
+<!--    // map.setCenter(-74,48);-->
+
+<!--    //timeout-->
+
+<!--    // markers-->
+<!--    // create marker object-->
+<!--    // set the place where you want the marker to be-->
+<!--    // add to the map-->
+<!--    // var marker = new mapboxgl.Marker();-->
+<!--    //-->
+<!--    // marker.setLngLat({lng: -98.4916, lat: 29.4252});-->
+<!--    // marker.addTo(map);-->
+<!--    // marker.setDraggable(true);-->
+
+<!--    //other way to do it-->
+<!--    // marker-->
+<!--    //     .setLngLat({lng: -98.4916, lat: 29.4252})-->
+<!--    //     .addTo(map);-->
+
+<!--    //popups-->
+<!--    // var popup = new mapboxgl.Popup();-->
+<!--    //-->
+<!--    // popup.setHTML("<h3>San Antonio</h3>");-->
+<!--    // marker.setPopup(popup);-->
+
+
+<!--    //Events-->
+<!--    // map.on('click', function() {-->
+<!--    //     console.log('hello');-->
+<!--    // });-->
+<!--    // marker.on('dragend', function() {-->
+<!--    //     console.log('hello')-->
+<!--    // });-->
+
+<!--    // geocode method form mapbox-geocode-utils.js-->
+<!--    geocode("600 Navarro St #350, San Antonio,TX 78205", MAPBOX_KEY).then(function(result){-->
+<!--        console.log(result);-->
+<!--        map.setCenter(result);-->
+<!--        map.setZone(20);-->
+<!--    });-->
+
+<!--    //reverse geocode method-->
+<!--    // reverseGeoCode({lng:,lat:}, mapboxKey).then(function(results){-->
+<!--    //     console.log(results);-->
+<!--    // });-->
+
+
+
+
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<h1>Welcome, </h1><h1 th:text="${user.firstName}">!</h1>-->
+
+
+<!--<div class="px-4 pt-0 pb-4 bg-dark" th:object="${user.firstName}">-->
+<!--    <div class="media align-items-end profile-header">-->
+<!--        <div class="profile mr-3"><img th:src="@{${'/img/profile_placeholder.png'}}" alt="..." width="196" class="rounded mb-2 img-thumbnail"><a th:href="@{/profile/edit/{id}(id=${user.id})}" class="btn btn-light btn-sm btn-block">Edit profile</a></div>-->
+<!--        <div class="media-body mb-5 text-white">-->
+<!--            <h4>Bio: </h4><p class="mt-0 mb-0"><span th:text="${user.barberDetail.bio}"></span> </p>-->
+<!--            <h4>Phone Number: </h4><p class="small mb-4" th:text="${user.barberDetail.phone}"> <i class="fas fa-at mr-2"></i></p>-->
+<!--            <h4>Hours of Operation: </h4><p class="small mb-4" th:text="${user.barberDetail.hoursOfWork}"> <i class="far fa-envelope mr-2"></i>></p>-->
+<!--            <form th:action="@{/barber/edit-barber-details}" th:method="get">-->
+<!--                <input type="hidden" th:name="editBarberDetailsButton" th:value="${user.barberDetail.id}">-->
+<!--                <button class="btn btn-primary">Edit Barber Details</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<h1>Location of Business: </h1>-->
+
+<!--<div class="px-4 pt-0 pb-4 bg-dark" th:object="${user.firstName}">-->
+<!--    <div class="media align-items-end profile-header">-->
+<!--        &lt;!&ndash;            <div class="profile mr-3"><img th:src="@{${'/img/profile_placeholder.png'}}" alt="..." width="196" class="rounded mb-2 img-thumbnail"><a th:href="@{/profile/edit/{id}(id=${user.id})}" class="btn btn-light btn-sm btn-block">Edit profile</a></div>&ndash;&gt;-->
+<!--        <div class="media-body mb-5 text-white">-->
+<!--            <h5>Address One: </h5><p class="mt-0 mb-0"><p th:text="${user.barberDetail.location.addressOne}"></p> </p>-->
+<!--            <h5>City: </h5><p class="small mb-4" th:text="${user.barberDetail.location.city}"> <i class="fas fa-at mr-2"></i></p>-->
+<!--            <h5>State: </h5><p class="small mb-4" th:text="${user.barberDetail.location.state}"> <i class="far fa-envelope mr-2"></i>></p>-->
+<!--            <h5>Zip Code: </h5><p class="small mb-4" th:text="${user.barberDetail.location.zipCode}"> <i class="far fa-envelope mr-2"></i>></p>-->
+<!--            <form th:action="@{/barber/edit-barber-location}" th:method="get">-->
+<!--                <input type="hidden" th:name="editLocationButton" th:value="${user.barberDetail.location.id}">-->
+<!--                <button class="btn btn-primary">Edit Barber Location</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
