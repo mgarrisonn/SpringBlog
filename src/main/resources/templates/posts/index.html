@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
+<head th:include="partials/head :: head">
     <meta charset="UTF-8">
     <title>Viewing All Posts</title>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
     <div th:each="post : ${posts}">
         <h1 th:text="${post.title}"></h1>
         <p th:text="${post.post}"></p>
         <p th:text="${post.author.email}"></p>
         <a class="btn btn-primary" th:href="@{/posts/{id}/edit(id=${post.id})}" role="button">Edit</a>
     </div>
+</div>
 </body>
 </html>
