@@ -88,6 +88,9 @@ private long id;
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "author")
     private List<Post> posts;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Image> images;
+
 //
 //    public User(long id, String username, String email, String password) {
 //        this.id = id;
@@ -105,6 +108,11 @@ private long id;
 
     public User(){}
 
+
+    public User(List<Post> posts, List<Image> images) {
+        this.posts = posts;
+        this.images = images;
+    }
 
     public long getId() {
         return id;
@@ -144,5 +152,13 @@ private long id;
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

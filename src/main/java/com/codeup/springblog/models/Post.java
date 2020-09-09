@@ -21,6 +21,10 @@ public class Post {
     @OneToMany(mappedBy = "parentPost")
     private List<Comment> comments;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+    private List<Image> images;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
@@ -41,14 +45,21 @@ public class Post {
         this.post = post;
     }
 
-    public Post(Long id, String title, String post, User author){
+    public Post(Long id, String title, String post, User author, List<Image> images){
         this.id = id;
         this.title = title;
         this.post = post;
         this.author = author;
+        this.images = images;
+
     }
 
-
+    public Post(List<Comment> comments, List<Image> images, User author, List<Tag> tags) {
+        this.comments = comments;
+        this.images = images;
+        this.author = author;
+        this.tags = tags;
+    }
 
     public String getTitle(){
         return this.title;
@@ -96,5 +107,13 @@ public class Post {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
