@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html lang="en">
 <head th:include="partials/head :: head">
-
     <meta charset="UTF-8">
     <title>Create Post</title>
+    <meta class="filestack" th:content="${@environment.getProperty('filestack.api.key')}">
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
@@ -38,9 +38,34 @@
         <input type="text" class="form-control" id="body" th:field="*{post}">
     </div>
 
+    <input type="hidden" id="imageUpload" name="imageUpload" value="null">
+    <img src="" class="hidden" id="imagePreview" style="height: 200px">
+
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
+
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/keys.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+        // This one works with creating a service and uploading an image for that service
+
+        const client = filestack.init(FILESTACK_KEY);
+
+        const options = {
+            onUploadDone: saveLocation
+        };
+        client.picker(options).open();
+
+        function saveLocation(resp){
+            console.log(resp);
+            // do some error handling and such here like fileError > filesuploaded[0]
+            const photo = resp.filesUploaded[0];
+            document.getElementById("imageUpload").value = photo.handle;
+
+            document.getElementById("imagePreview").src = "https://cdn.filestackcontent.com/" + photo.handle;
+        }
+    </script>
 
 </main>
 

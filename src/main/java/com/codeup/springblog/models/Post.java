@@ -22,7 +22,7 @@ public class Post {
     private List<Comment> comments;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Image> images;
 
     @ManyToOne

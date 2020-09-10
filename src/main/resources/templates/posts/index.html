@@ -11,6 +11,12 @@
         <h1 th:text="${post.title}"></h1>
         <p th:text="${post.post}"></p>
         <p th:text="${post.author.email}"></p>
+
+        <div th:each="image :${service.getImages()}">
+            <img th:src="${'https://cdn.filestackcontent.com/' + image.getFilestackUrl()}" class="hidden"
+                 style="height: 200px"></img>
+        </div>
+
         <a class="btn btn-primary" th:href="@{/posts/{id}/edit(id=${post.id})}" role="button">Edit</a>
     </div>
 </div>
