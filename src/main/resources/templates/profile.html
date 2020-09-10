@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="partials/head :: head">
+
     <meta charset="UTF-8">
     <title>Profile</title>
 </head>
-<nav th:replace= "partials/navbar :: navbar" />
-
 <body>
-<h1>This is your profile</h1>
-<!--<p>Your username is: <span th:text="${username}"></span></p>-->
-<!--<p>Your password is: <span th:text="${password}"></span></p>-->
-<!--  forEach ad inside of collection ${ads}  -->
-<div th:if = "${isLoggedIn}">
-    <ul th:each="ad : ${ads}">
-        <li th:text="${ad}"></li>
-    </ul>
+<nav th:replace="partials/navbar :: navbar"/>
+<div class="container">
+    <br>
+    <h1 class="text-center">This is your profile</h1>
+    <br>
+    <div class="px-4 pt-0 pb-4 bg-dark" th:object="${user}">
+    <div>
+        <a th:href="@{/profile/edit/{id}(id=${user.id})}" class="btn btn-submit btn-sm btn-block">Edit profile</a>
+    </div>
+    </div>
+    <!--<p>Your username is: <span th:text="${username}"></span></p>-->
+    <!--<p>Your password is: <span th:text="${password}"></span></p>-->
+    <!--  forEach ad inside of collection ${ads}  -->
+    <!--<div th:if = "${isLoggedIn}">-->
+    <!--    <ul th:each="ad : ${ads}">-->
+    <!--        <li th:text="${ad}"></li>-->
+    <!--    </ul>-->
+    <!--</div>-->
 </div>
 </body>
-<footer th:replace= "partials/footer :: footer" />
+<footer th:replace="partials/footer :: footer"/>
 
 </html>

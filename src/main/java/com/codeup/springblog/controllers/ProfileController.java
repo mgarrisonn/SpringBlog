@@ -1,5 +1,9 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.User;
+import com.codeup.springblog.repositories.ImageRepository;
+import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,15 @@ import java.util.ArrayList;
 
 @Controller
 public class ProfileController {
+
+    private UserRepository users;
+    private ImageRepository imagesDao;
+
+    public ProfileController(UserRepository users, ImageRepository imagesDao) {
+        this.users = users;
+        this.imagesDao = imagesDao;
+    }
+
 
     @GetMapping("/profile/{username}")
     public String viewProfile(@PathVariable String username, Model model){
@@ -40,4 +53,14 @@ public class ProfileController {
 //        user is redirected to their profile, with this information available
         return "profile";
     }
+
+    @GetMapping("/profile/edit/{id}")
+    public String editProfile(@PathVariable long id, Model model){
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", users.getOne(sessionUser.getId()));
+        return "users/edit-profile";
+    }
+
+
+
 }
