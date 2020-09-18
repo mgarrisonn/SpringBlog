@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="main">
+    <div class="container">
+        <h2 class="text-center">Create Comment</h2>
+
+        <form th:action="@{'/comments/create'}" th:method="post" th:object="${comment}">
+            <div class="form-group">
+                <label for="createId"></label>
+                <input type="hidden" id="createId" th:field="*{id}">
+            </div>
+            <div class="form-group">
+                <label for="createContent"></label>
+                <input type="text" id="createContent" th:field="*{content}">
+            </div>
+            <button class="btn btn-submit" type="submit">Submit Comment</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
