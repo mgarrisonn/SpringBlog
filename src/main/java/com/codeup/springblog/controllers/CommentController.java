@@ -33,6 +33,13 @@ public class CommentController {
         return "comments/index";
     }
 
+    @GetMapping("/comments/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        Comment pulledComment = commentDao.getOne(id);
+        model.addAttribute("comment", pulledComment);
+        return "comments/show";
+    }
+
     @GetMapping("/comments/create/{id")
     public String showCreateCommentForm(Model model, @PathVariable Long id) {
         User user = userDao.findByUsername(postDao.getOne(id));

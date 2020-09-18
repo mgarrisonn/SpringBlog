@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="main">
+    <div class="container">
+        <h2 class="text-center">Viewing Comment By Id</h2>
+
+        <div class="card">
+            <div class="card-header">
+                Comment
+            </div>
+            <div class="card-body">
+                <p class="card-text" th:text="${comment.content}"></p>
+                <a class="btn btn-primary" th:href="@{'/comments/' + ${comment.id} + '/edit'}">Edit Comment</a>
+                <a class="btn btn-primary" th:href="@{'/comments/' + ${comment.id} + '/delete'}">Delete Review</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
