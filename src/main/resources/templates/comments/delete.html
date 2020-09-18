@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="main">
+    <div class="container">
+        <h2 class="text-center">Would You Like to Delete Your Comment?</h2>
+
+        <div class="card">
+            <div class="card-header">
+                Comment
+            </div>
+            <div class="card-body">
+                <p class="card-text" th:text="${comment.content}"></p>
+                <form th:action="@{'/comments/' + ${comment.getId()} + '/delete'}" th:method="post">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
