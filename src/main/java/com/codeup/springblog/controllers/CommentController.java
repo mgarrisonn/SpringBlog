@@ -6,6 +6,7 @@ import com.codeup.springblog.repositories.CommentRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +70,20 @@ public class CommentController {
         Comment deleteComment = commentDao.getOne(comment.getId());
         commentDao.delete(deleteComment);
         return "redirect:/posts";
+    }
+
+    @GetMapping("/comments/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        model.addAttribute("comment", commentDao.getOne(id));
+        return "comments/edit";
+    }
+
+    @PostMapping("/comments/{id}/edit")
+    public String editComment(@PathVariable Long id, @ModelAttribute Comment comment) {
+        User user = userDao.getOne(1L);
+        comment.setParentPost(user);
+        commentDao.save(comment);
+        return "redirect:/comments";
     }
 
 }

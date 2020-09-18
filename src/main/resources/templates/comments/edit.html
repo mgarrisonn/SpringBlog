@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="partials/head :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="main">
+    <div class="container">
+
+        <h2 class="text-center">Edit Comment</h2>
+
+        <form th:action="@{/comments/{id}/edit(id=${comment.id})}" th:method="post" th:object="${comment}">
+            <div class="form-group">
+                <label for="editContent">Content</label>
+                <textarea class="form-control" id="editContent" th:field="*{content}" th:value="*{content}"></textarea>
+            </div>
+            <button style="border-left: 4px solid navy;" class="bg-dark text-white" type="submit">Edit Comment</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
